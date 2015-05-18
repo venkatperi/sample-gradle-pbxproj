@@ -1,0 +1,37 @@
+buildscript {
+  repositories {
+    jcenter()
+    flatDir { dirs '../gradle-pbxproj/build/libs' }
+  }
+  dependencies {
+    classpath "com.vperi:gradle-pbxproj-plugin:0.1.0-SNAPSHOT"
+    classpath 'com.googlecode.plist:dd-plist:1.16'
+  }
+  configurations.all { resolutionStrategy.cacheChangingModulesFor 0, 'seconds' }
+}
+
+apply plugin: 'pbxproj'
+
+repositories {
+  jcenter()
+}
+
+group = "com.vperi"
+version = "0.1.0-SNAPSHOT"
+
+infoPlist{
+  NSHumanReadableCopyright =  "Testing 123"
+}
+
+targets {
+  SampleApp {
+    type "Application"
+    language "Swift"
+    platform "Osx"
+    buildConfiguration "Debug"
+  }
+}
+
+
+
+
