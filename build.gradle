@@ -16,22 +16,31 @@ repositories {
   jcenter()
 }
 
+dependencies {
+}
+
 group = "com.vperi"
 version = "0.1.0-SNAPSHOT"
 
-infoPlist{
-  NSHumanReadableCopyright =  "Testing 123"
-}
-
 targets {
-  SampleApp {
+  OsxApp {
     type "Application"
     language "Swift"
     platform "Osx"
     buildConfiguration "Debug"
+    infoPlist{
+      NSHumanReadableCopyright =  "Testing 123"
+    }
+  }
+  IosApp {
+    type "Application"
+    language "Swift"
+    platform "Ios"
+    buildConfiguration "Debug"
+    infoPlist{
+      NSHumanReadableCopyright =  "Testing 123"
+    }
   }
 }
-
-
 
 
