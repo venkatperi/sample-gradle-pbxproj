@@ -15,8 +15,10 @@ apply plugin: 'pbxproj'
 repositories {
   jcenter()
 }
-
-dependencies {
+project {
+    infoPlist{
+      "NSHumanReadableCopyright"  "Copyright © 2015 Example Inc. All rights reserved."
+    }
 }
 
 group = "com.vperi"
@@ -29,7 +31,11 @@ targets {
     platform "Osx"
     buildConfiguration "Debug"
     infoPlist{
-      NSHumanReadableCopyright =  "Testing 123"
+      iconFile "iTunesArtwork"
+    }
+    entitlements {
+      "com.apple.security.app-sandbox" true
+      "com.apple.security.files.user-selected.read-only" true
     }
   }
   IosApp {
@@ -38,7 +44,7 @@ targets {
     platform "Ios"
     buildConfiguration "Debug"
     infoPlist{
-      NSHumanReadableCopyright =  "Testing 123"
+      iconFile "iTunesArtwork"
     }
   }
 }
