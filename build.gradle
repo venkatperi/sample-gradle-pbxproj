@@ -15,14 +15,25 @@ apply plugin: 'pbxproj'
 repositories {
   jcenter()
 }
-project {
-    infoPlist{
-      "NSHumanReadableCopyright"  "Copyright © 2015 Example Inc. All rights reserved."
-    }
-}
 
 group = "com.vperi"
 version = "0.1.0-SNAPSHOT"
+
+project {
+  infoPlist {
+    "NSHumanReadableCopyright" "Copyright © 2015 Example Inc. All rights reserved."
+  }
+}
+
+keychains {
+  def cert = { name -> System.properties[ "com.vperi.apple.appstore.cert.$name" ] }
+  def macApp = cert "app"
+  appStore {
+    certificates "${macApp}.cer"
+    imports( [ "${macApp}.p12": "${cert( 'password' )}" ] )
+  }
+}
+
 
 targets {
   OsxApp {
@@ -30,7 +41,7 @@ targets {
     language "Swift"
     platform "Osx"
     buildConfiguration "Debug"
-    infoPlist{
+    infoPlist {
       iconFile "iTunesArtwork"
     }
     entitlements {
@@ -43,7 +54,7 @@ targets {
     language "Swift"
     platform "Ios"
     buildConfiguration "Debug"
-    infoPlist{
+    infoPlist {
       iconFile "iTunesArtwork"
     }
   }
