@@ -28,9 +28,12 @@ project {
 keychains {
   def cert = { name -> System.properties[ "com.vperi.apple.appstore.cert.$name" ] }
   def macApp = cert "app"
+  def macInstaller = cert "installer"
   appStore {
-    certificates "${macApp}.cer"
-    imports( [ "${macApp}.p12": "${cert( 'password' )}" ] )
+    certificates "${macApp}.cer", "${macInstaller}.cer"
+    imports( [ "${macApp}.p12": "${cert( 'password' )}",
+        "${macInstaller}.p12": "${cert( 'password' )}" ]
+    )
   }
 }
 
@@ -40,7 +43,6 @@ targets {
     type "Application"
     language "Swift"
     platform "Osx"
-    buildConfiguration "Debug"
     infoPlist {
       iconFile "iTunesArtwork"
     }
@@ -53,7 +55,6 @@ targets {
     type "Application"
     language "Swift"
     platform "Ios"
-    buildConfiguration "Debug"
     infoPlist {
       iconFile "iTunesArtwork"
     }
